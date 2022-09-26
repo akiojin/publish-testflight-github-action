@@ -4104,6 +4104,7 @@ async function Run() {
                 "key": core.getInput('api-key').replace('\n', '\\n')
             }));
         }
+        core.info(core.getInput('api-key').replace('\n', '\\n'));
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))

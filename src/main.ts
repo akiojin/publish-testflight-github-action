@@ -16,6 +16,8 @@ async function Run()
             }))
         }
 
+        core.info(core.getInput('api-key').replace('\n', '\\n'))
+
         const builder = new ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))
