@@ -1,8 +1,8 @@
 name: 'akiojin/publis-testflight-github-action'
 description: 'Publish TestFlight GitHub action'
 inputs:
-  api-key-base64:
-    description: 'The App Connect API Key base64'
+  api-key:
+    description: 'The App Connect API Key'
     required: false
   api-key-path:
     description: 'The App Connect API Key path'

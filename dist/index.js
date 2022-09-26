@@ -4100,8 +4100,8 @@ function GenereteAPIKey(keyID, issuerID, APIKeyPath) {
 async function Run() {
     try {
         const APIKeyPath = core.getInput('api-key-path') || './api-key.p8';
-        if (core.getInput('api-key-base64') != null) {
-            await fs.writeFile(APIKeyPath, Buffer.from(core.getInput('api-key-base64'), 'base64'));
+        if (core.getInput('api-key') != null) {
+            await fs.writeFile(APIKeyPath, Buffer.from(core.getInput('api-key')));
         }
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
