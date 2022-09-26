@@ -4094,17 +4094,19 @@ const core = __importStar(__nccwpck_require__(74));
 const exec = __importStar(__nccwpck_require__(479));
 const argument_builder_1 = __nccwpck_require__(175);
 const fs = __importStar(__nccwpck_require__(292));
+function GenereteAPIKey(keyID, issuerID, APIKeyPath) {
+    return `"{\"key_id\": \"${keyID}\", \"issuer_id\":\"${issuerID}\", \"key_filepath\": \"${APIKeyPath}\"}"`;
+}
 async function Run() {
     try {
-        const apiKeyPath = core.getInput('api-key-path') || './api-key.p8';
+        const APIKeyPath = core.getInput('api-key-path') || './api-key.p8';
         if (core.getInput('api-key-base64') != null) {
-            await fs.writeFile(apiKeyPath, Buffer.from(core.getInput('api-key-base64'), 'base64'));
+            await fs.writeFile(APIKeyPath, Buffer.from(core.getInput('api-key-base64'), 'base64'));
         }
-        const apiKey = `"{\"key_id\": \"${core.getInput('key-id')}\", \"issuer_id\":\"${core.getInput('issuer-id')}\", \"key_filepath\": \"${apiKeyPath}\"}"`;
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('app-path'))
-            .Append('--api_key', apiKey);
+            .Append('--api_key', GenereteAPIKey(core.getInput('key-id'), core.getInput('issuer-id'), APIKeyPath));
         core.startGroup('Run fastlane "pilot"');
         await exec.exec('fastlane', builder.Build());
         core.endGroup();
