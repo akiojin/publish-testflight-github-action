@@ -2,19 +2,19 @@ name: 'akiojin/publis-testflight-github-action'
 description: 'Publish TestFlight GitHub action'
 inputs:
   api-key-base64:
-    description: ''
+    description: 'The App Connect API Key base64'
     required: false
   api-key-path:
-    description: ''
+    description: 'The App Connect API Key path'
     required: false
   app-path:
-    description: ''
+    description: 'IPA file path to upload'
     required: true
   issuer-id:
-    description: ''
+    description: 'Issuer ID'
     required: true
   key-id:
-    description: ''
+    description: 'Key ID'
     required: true
 runs:
   using: 'node16'
