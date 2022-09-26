@@ -12,13 +12,11 @@ async function Run()
             await fs.writeFile(apiKeyPath, Buffer.from(core.getInput('api-key-base64'), 'base64'))
         }
 
-        const apiKey = `{\"key_id\": \"${core.getInput('key-id')}\", \"issuer_id\":\"${core.getInput('issuer-id')}\", \"key_filepath\": \"${apiKeyPath}\"}`
-
+        const apiKey = `"{\"key_id\": \"${core.getInput('key-id')}\", \"issuer_id\":\"${core.getInput('issuer-id')}\", \"key_filepath\": \"${apiKeyPath}\"}"`
         const builder = new ArgumentBuilder()
             .Append('pilot', 'upload')
+            .Append('--ipa', core.getInput('app-path'))
             .Append('--api_key', apiKey)
-
-        process.env['PILOT_IPA'] = core.getInput('app-path')
 
         core.startGroup('Run fastlane "pilot"')
         await exec.exec('fastlane', builder.Build())
