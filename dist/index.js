@@ -4098,13 +4098,15 @@ async function Run() {
     try {
         const APIKeyPath = core.getInput('api-key-path') || './api-key.json';
         if (core.getInput('api-key') != null) {
-            await fs.writeFile(APIKeyPath, JSON.stringify({
+            const APIKey = core.getInput('api-key').replace(/\n/g, '\\n');
+            const json = JSON.stringify({
                 "key_id": core.getInput('key-id'),
                 "issuer_id": core.getInput('issuer-id'),
-                "key": core.getInput('api-key').replace('\n', '\\n')
-            }));
+                "key": APIKey
+            });
+            core.info(APIKey);
+            await fs.writeFile(APIKeyPath, json);
         }
-        core.info(core.getInput('api-key').replace('\n', '\\n'));
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))

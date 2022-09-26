@@ -9,14 +9,17 @@ async function Run()
         const APIKeyPath = core.getInput('api-key-path') || './api-key.json'
 
         if (core.getInput('api-key') != null) {
-            await fs.writeFile(APIKeyPath, JSON.stringify({
+            const APIKey = core.getInput('api-key').replace(/\n/g, '\\n')
+            const json = JSON.stringify({
                 "key_id": core.getInput('key-id'),
                 "issuer_id": core.getInput('issuer-id'),
-                "key": core.getInput('api-key').replace('\n', '\\n')
-            }))
-        }
+                "key": APIKey
+            })
 
-        core.info(core.getInput('api-key').replace('\n', '\\n'))
+            core.info(APIKey)
+
+            await fs.writeFile(APIKeyPath, json)
+        }
 
         const builder = new ArgumentBuilder()
             .Append('pilot', 'upload')
