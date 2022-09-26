@@ -3,11 +3,6 @@ import * as exec from '@actions/exec';
 import { ArgumentBuilder } from '@akiojin/argument-builder';
 import * as fs from 'fs/promises';
 
-function GenereteAPIKey(keyID: string, issuerID: string, APIKeyPath: string): string
-{
-    return `"{\\"key_id\\": \\"${keyID}\\", \\"issuer_id\\":\\"${issuerID}\\", \\"key_filepath\\": \\"${APIKeyPath}\\"}"`
-}
-
 async function Run()
 {
     try {
@@ -20,7 +15,11 @@ async function Run()
         const builder = new ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))
-            .Append('--api_key', GenereteAPIKey(core.getInput('key-id'), core.getInput('issuer-id'), APIKeyPath))
+            .Append('--api_key', JSON.stringify({
+                "key_id": core.getInput('key-id'),
+                "issuer_id": core.getInput('issuer-id'),
+                "key_filepath": APIKeyPath
+            }))
 
         core.startGroup('Run fastlane "pilot"')
         await exec.exec('fastlane', builder.Build())

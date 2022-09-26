@@ -4094,9 +4094,6 @@ const core = __importStar(__nccwpck_require__(74));
 const exec = __importStar(__nccwpck_require__(479));
 const argument_builder_1 = __nccwpck_require__(175);
 const fs = __importStar(__nccwpck_require__(292));
-function GenereteAPIKey(keyID, issuerID, APIKeyPath) {
-    return `"{\\"key_id\\": \\"${keyID}\\", \\"issuer_id\\":\\"${issuerID}\\", \\"key_filepath\\": \\"${APIKeyPath}\\"}"`;
-}
 async function Run() {
     try {
         const APIKeyPath = core.getInput('api-key-path') || './api-key.p8';
@@ -4106,7 +4103,11 @@ async function Run() {
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))
-            .Append('--api_key', GenereteAPIKey(core.getInput('key-id'), core.getInput('issuer-id'), APIKeyPath));
+            .Append('--api_key', JSON.stringify({
+            "key_id": core.getInput('key-id'),
+            "issuer_id": core.getInput('issuer-id'),
+            "key_filepath": APIKeyPath
+        }));
         core.startGroup('Run fastlane "pilot"');
         await exec.exec('fastlane', builder.Build());
         core.endGroup();
