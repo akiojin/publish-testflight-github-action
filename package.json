@@ -1,0 +1,30 @@
+{
+  "name": "publish-testflight-github-action",
+  "version": "0.1.0",
+  "description": "This action uploads artefacts (.apk or .ipa) to TestFlight.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akiojin/publish-testflight-github-action.git"
+  },
+  "keywords": [
+    "TestFlight",
+    "Publish",
+    "CI"
+  ],
+  "author": "akiojin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akiojin/publish-testflight-github-action/issues"
+  },
+  "homepage": "https://github.com/akiojin/publish-testflight-github-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/exec": "^1.1.1",
+    "@akiojin/argument-builder": "^1.0.0",
+    "@types/node": "^18.7.18"
+  }
+}

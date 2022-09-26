@@ -1,0 +1,24 @@
+name: 'akiojin/publis-testflight-github-action'
+description: 'Publish TestFlight GitHub action'
+inputs:
+  api-key-base64:
+    description: ''
+    required: false
+  api-key-path:
+    description: ''
+    required: false
+  app-path:
+    description: ''
+    required: true
+  issuer-id:
+    description: ''
+    required: true
+  key-id:
+    description: ''
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+branding:
+  icon: "upload-cloud"
+  color: "orange"
