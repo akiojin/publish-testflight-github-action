@@ -19,7 +19,7 @@ async function Run()
 
         const builder = new ArgumentBuilder()
             .Append('pilot', 'upload')
-            .Append('--ipa', core.getInput('app-path'))
+            .Append('--ipa', core.getInput('ipa-path'))
             .Append('--api_key', GenereteAPIKey(core.getInput('key-id'), core.getInput('issuer-id'), APIKeyPath))
 
         core.startGroup('Run fastlane "pilot"')

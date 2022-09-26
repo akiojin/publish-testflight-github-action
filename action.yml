@@ -7,7 +7,7 @@ inputs:
   api-key-path:
     description: 'The App Connect API Key path'
     required: false
-  app-path:
+  ipa-path:
     description: 'IPA file path to upload'
     required: true
   issuer-id:
