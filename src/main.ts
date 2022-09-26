@@ -9,7 +9,7 @@ async function Run()
         const APIKeyPath = core.getInput('api-key-path') || './api-key.json'
 
         if (core.getInput('api-key') != null) {
-            const APIKey = core.getInput('api-key').replace(/\n/g, '\\n')
+            const APIKey = core.getInput('api-key')
             const json = JSON.stringify({
                 "key_id": core.getInput('key-id'),
                 "issuer_id": core.getInput('issuer-id'),
