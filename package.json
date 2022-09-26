@@ -1,6 +1,6 @@
 {
   "name": "publish-testflight-github-action",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This action uploads artefacts (.apk or .ipa) to TestFlight.",
   "main": "dist/index.js",
   "scripts": {
