@@ -16,6 +16,7 @@ async function Run()
                 "key": APIKey
             })
 
+            core.info(json)
             core.info(APIKey)
 
             await fs.writeFile(APIKeyPath, json)

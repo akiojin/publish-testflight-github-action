@@ -4104,6 +4104,7 @@ async function Run() {
                 "issuer_id": core.getInput('issuer-id'),
                 "key": APIKey
             });
+            core.info(json);
             core.info(APIKey);
             await fs.writeFile(APIKeyPath, json);
         }
