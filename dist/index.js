@@ -4095,7 +4095,7 @@ const exec = __importStar(__nccwpck_require__(479));
 const argument_builder_1 = __nccwpck_require__(175);
 const fs = __importStar(__nccwpck_require__(292));
 function GenereteAPIKey(keyID, issuerID, APIKeyPath) {
-    return `"{\"key_id\": \"${keyID}\", \"issuer_id\":\"${issuerID}\", \"key_filepath\": \"${APIKeyPath}\"}"`;
+    return `"{\\"key_id\\": \\"${keyID}\\", \\"issuer_id\\":\\"${issuerID}\\", \\"key_filepath\\": \\"${APIKeyPath}\\"}"`;
 }
 async function Run() {
     try {

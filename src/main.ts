@@ -5,7 +5,7 @@ import * as fs from 'fs/promises';
 
 function GenereteAPIKey(keyID: string, issuerID: string, APIKeyPath: string): string
 {
-    return `"{\"key_id\": \"${keyID}\", \"issuer_id\":\"${issuerID}\", \"key_filepath\": \"${APIKeyPath}\"}"`
+    return `"{\\"key_id\\": \\"${keyID}\\", \\"issuer_id\\":\\"${issuerID}\\", \\"key_filepath\\": \\"${APIKeyPath}\\"}"`
 }
 
 async function Run()
