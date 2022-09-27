@@ -1,6 +1,6 @@
 # publish-testflight-github-action
 
-ipa ファイルを TestFlight に配信する GitHub Action です。
+GitHub Action to deliver ipa files to TestFlight.
 
 ## Requirement
 
@@ -18,6 +18,21 @@ An API key is a value required to use the App Store Connect API.
 This key can be created at [App Store Connect](https://appstoreconnect.apple.com/access/api).
 
 ![API Key](API_Key.png)
+
+The API key was created through App Store Connect and the downloaded file (*.p8) should look like this
+
+```txt
+-----BEGIN PRIVATE KEY-----
+MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgqRVRAdjtVB+K2T7R
+Jzl3TJ3ninFWn7cMU8C/KaJtb1GgCgYIKoZIzj0DAQehRANCAAS2yyN09ebrFtlD
+umqAQ1WJTrpbcWhHnoGNrdVk2waj2eRL1ThZoBYkQUqkc9Qo11prUiETlfh+3/Lv
+........
+-----END PRIVATE KEY-----
+```
+
+Set this value to the GitHub Actions secret.
+
+![Secrets](Secrets.png)
 
 ## Arguments
 
