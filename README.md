@@ -34,6 +34,19 @@ Set this value to the GitHub Actions secret.
 
 ![Secrets](Secrets.png)
 
+## Usage
+
+### Simple usage
+
+```yml
+- uses: akiojin/publish-testflight-github-action@v0.1.11
+  with:
+    ipa-path: <IPA path>
+    api-key: ${{ secrets.APPLE_STORE_CONNECT_API_KEY }}
+    issuer-id: ${{ secrets.APPLE_STORE_CONNECT_ISSUER_ID }}
+    key-id: ${{ secrets.APPLE_STORE_CONNECT_KEY_ID }}
+```
+
 ## Arguments
 
 |Name|Required|Type|Default|Description|
