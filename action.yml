@@ -1,4 +1,4 @@
-name: 'akiojin/publis-testflight-github-action'
+name: 'Publish TestFlight'
 description: 'Publish TestFlight GitHub action'
 inputs:
   api-key:
