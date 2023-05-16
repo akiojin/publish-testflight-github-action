@@ -4104,29 +4104,36 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(186));
 const exec = __importStar(__nccwpck_require__(514));
 const argument_builder_1 = __nccwpck_require__(782);
 const fs = __importStar(__nccwpck_require__(292));
+const path_1 = __importDefault(__nccwpck_require__(17));
+const APIKeyFileName = 'api-key.json';
+async function GenerateAPIKeyJSON() {
+    const json = JSON.stringify({
+        "key_id": core.getInput('key-id'),
+        "issuer_id": core.getInput('issuer-id'),
+        "key": core.getInput('api-key')
+    });
+    const outputPath = path_1.default.join(core.getInput('output-directory'), APIKeyFileName);
+    await fs.writeFile(outputPath, json);
+    core.startGroup(`Generate "${outputPath}"`);
+    core.info(`${APIKeyFileName}:\n${json}`);
+    core.endGroup();
+    return outputPath;
+}
 async function Run() {
     try {
-        const APIKeyPath = core.getInput('api-key-path') || './api-key.json';
-        if (core.getInput('api-key') != null) {
-            const APIKey = core.getInput('api-key');
-            const json = JSON.stringify({
-                "key_id": core.getInput('key-id'),
-                "issuer_id": core.getInput('issuer-id'),
-                "key": APIKey
-            });
-            core.info(json);
-            core.info(APIKey);
-            await fs.writeFile(APIKeyPath, json);
-        }
+        const outputPath = core.getInput('api-key-path') || await GenerateAPIKeyJSON();
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))
-            .Append('--api_key_path', APIKeyPath);
+            .Append('--api_key_path', outputPath);
         core.startGroup('Run fastlane "pilot"');
         await exec.exec('fastlane', builder.Build());
         core.endGroup();
