@@ -4113,23 +4113,28 @@ const exec = __importStar(__nccwpck_require__(514));
 const argument_builder_1 = __nccwpck_require__(782);
 const fs = __importStar(__nccwpck_require__(292));
 const path_1 = __importDefault(__nccwpck_require__(17));
-const APIKeyFileName = 'api-key.json';
-async function GenerateAPIKeyJSON() {
+async function GenerateAPIKeyJSON(key, keyID, issuerID, isInHouse, outputDirectory) {
+    const APIKeyFileName = 'api-key.json';
     const json = JSON.stringify({
-        "key_id": core.getInput('key-id'),
-        "issuer_id": core.getInput('issuer-id'),
-        "key": core.getInput('key')
+        "key_id": keyID,
+        "issuer_id": issuerID,
+        "in_house": isInHouse,
+        "key": key
     });
-    const outputPath = path_1.default.join(core.getInput('output-directory'), APIKeyFileName);
+    const outputPath = path_1.default.join(outputDirectory, APIKeyFileName);
     await fs.writeFile(outputPath, json);
-    core.startGroup(`Generate "${outputPath}"`);
+    core.setOutput('output-path', outputPath);
+    core.startGroup(`Generate ${APIKeyFileName}`);
+    core.info(`APP_STORE_CONNECT_API_KEY_PATH=${outputPath}`);
     core.info(`${APIKeyFileName}:\n${json}`);
     core.endGroup();
+    core.exportVariable('APP_STORE_CONNECT_API_KEY_PATH', outputPath);
     return outputPath;
 }
 async function Run() {
     try {
-        const outputPath = core.getInput('api-key-path') || await GenerateAPIKeyJSON();
+        const outputPath = core.getInput('api-key-path') ||
+            await GenerateAPIKeyJSON(core.getInput('key'), core.getInput('key-id'), core.getInput('issuer-id'), core.getBooleanInput('in-house'), core.getInput('output-directory'));
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')
             .Append('--ipa', core.getInput('ipa-path'))
