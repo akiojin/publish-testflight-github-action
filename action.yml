@@ -11,6 +11,13 @@ inputs:
   issuer-id:
     description: 'Issuer ID'
     required: false
+  in-house:
+    description: >
+      Specify true for Apple Developer Enterprise Program.
+      Otherwise, specify false.
+      If omitted, false is specified.
+    required: false
+    default: false
   key:
     description: >
       App Connect API Key
