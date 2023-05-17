@@ -11,7 +11,7 @@ async function GenerateAPIKeyJSON(): Promise<string>
     const json = JSON.stringify({
         "key_id": core.getInput('key-id'),
         "issuer_id": core.getInput('issuer-id'),
-        "key": core.getInput('api-key')
+        "key": core.getInput('key')
     })
 
     const outputPath = path.join(core.getInput('output-directory'), APIKeyFileName)
