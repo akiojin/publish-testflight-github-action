@@ -4133,7 +4133,7 @@ async function GenerateAPIKeyJSON(key, keyID, issuerID, isInHouse, outputDirecto
 }
 async function Run() {
     try {
-        const outputPath = core.getInput('api-key-path') ||
+        const outputPath = core.getInput('api-key-path') || process.env['APP_STORE_CONNECT_API_KEY_PATH'] ||
             await GenerateAPIKeyJSON(core.getInput('key'), core.getInput('key-id'), core.getInput('issuer-id'), core.getBooleanInput('in-house'), core.getInput('output-directory'));
         const builder = new argument_builder_1.ArgumentBuilder()
             .Append('pilot', 'upload')

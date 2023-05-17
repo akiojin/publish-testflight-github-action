@@ -33,7 +33,7 @@ async function GenerateAPIKeyJSON(key: string, keyID: string, issuerID: string, 
 async function Run()
 {
     try {
-        const outputPath = core.getInput('api-key-path') ||
+        const outputPath = core.getInput('api-key-path') || process.env['APP_STORE_CONNECT_API_KEY_PATH'] ||
             await GenerateAPIKeyJSON(
                 core.getInput('key'),
                 core.getInput('key-id'),
